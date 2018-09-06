@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour {
     [SerializeField] float yPush = 15f;
     [SerializeField] AudioClip[] ballSounds;
     [SerializeField] float randomFactor = 0.2f;
+    [SerializeField] float ballSpeed = 6f;
+    [SerializeField] float accelerator = 0.05f;
 
     // State
     Vector2 paddleToBallVector;
@@ -19,7 +21,8 @@ public class Ball : MonoBehaviour {
     Rigidbody2D myRigidBody2D;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
         paddleToBallVector = transform.position - paddle1.transform.position;
         myAudioSource = GetComponent<AudioSource>();
         myRigidBody2D = GetComponent<Rigidbody2D>();
@@ -33,6 +36,12 @@ public class Ball : MonoBehaviour {
             LockBalltoPaddle();
             LaunchOnMouseClick();
         }
+    }
+
+    private void speedUpBall()
+    {
+        myRigidBody2D.velocity = myRigidBody2D.velocity.normalized * ballSpeed;
+        ballSpeed += accelerator;
     }
 
     private void LaunchOnMouseClick()
@@ -61,6 +70,8 @@ public class Ball : MonoBehaviour {
             AudioClip Clip = ballSounds[UnityEngine.Random.Range(0, ballSounds.Length)];
             myAudioSource.PlayOneShot(Clip);
             myRigidBody2D.velocity += velocityTweak;
+
+            speedUpBall();
         }
     }
        
