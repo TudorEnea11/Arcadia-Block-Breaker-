@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour {
     [SerializeField] float yPush = 15f;
     [SerializeField] AudioClip[] ballSounds;
     [SerializeField] float randomFactor = 0.2f;
-    [SerializeField] float ballSpeed = 6f;
+    [SerializeField] float ballSpeed = 15f;
     [SerializeField] float accelerator = 0.05f;
 
     // State
